@@ -1,0 +1,44 @@
+{% extends "dashboard_layout.html" %}
+{% block title %}Report: {{ club.name }}{% endblock %}
+{% block dashboard_content %}
+<div class="content-header">
+    <h2>Attendance Report: {{ club.name }}</h2>
+    <a href="{{ url_for('reports') }}" class="btn btn-secondary">Back to Reports</a>
+</div>
+
+{% for event in club.events|sort(attribute='start_time', reverse=True) %}
+<div class="content-card" style="margin-bottom: 30px;">
+    <h3>{{ event.title }} - <span class="text-muted">{{ event.start_time.strftime('%B %d, %Y') }}</span></h3>
+    {% set present_count = event.attendances.filter_by(status='Present').count() %}
+    {% set total_members = club.members.count() %}
+    <p><strong>{{ present_count }} out of {{ total_members }} members attended.</strong></p>
+    
+    <div class="table-container">
+        <table class="data-table">
+            <thead><tr><th>Member</th><th>Status</th></tr></thead>
+            <tbody>
+                {% for member in club.members %}
+                <tr>
+                    <td>{{ member.username }}</td>
+                    {% set attendance = event.attendances.filter_by(user_id=member.id).first() %}
+                    <td>
+                        {% if attendance %}
+                            <span class="badge badge-{{ attendance.status|lower }}">{{ attendance.status }}</span>
+                        {% else %}
+                            <span class="badge badge-absent">Absent</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="empty-state">
+    <i class="fas fa-folder-open empty-state-icon"></i>
+    <h3>No Events Found</h3>
+    <p>This club has not held any events yet, so there is no attendance data to report.</p>
+</div>
+{% endfor %}
+{% endblock %}

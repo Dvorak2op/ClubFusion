@@ -1,0 +1,50 @@
+{% extends "dashboard_layout.html" %}
+{% block title %}Manage Event: {{ event.title }}{% endblock %}
+{% block dashboard_content %}
+<div class="content-header">
+    <div>
+        <h2>Manage Event: {{ event.title }}</h2>
+        <p class="text-muted">For {{ club.name }} on {{ event.start_time.strftime('%B %d, %Y') }}</p>
+    </div>
+    <a href="{{ url_for('manage_club', club_id=club.id) }}" class="btn btn-secondary">Back to Club</a>
+</div>
+
+<div class="content-card">
+    <h3><i class="fas fa-clipboard-check"></i> Attendance Roster</h3>
+    <p>Mark the status for each member of the club for this event.</p>
+    <form action="{{ url_for('update_attendance', event_id=event.id) }}" method="POST">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Member Name</th>
+                    <th style="text-align: center;">Present</th>
+                    <th style="text-align: center;">Absent</th>
+                    <th style="text-align: center;">Excused</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in club.members %}
+                <tr>
+                    <td>{{ member.username }}</td>
+                    {% set current_status = attendance_records.get(member.id, 'Absent') %}
+                    <td style="text-align: center;">
+                        <input type="radio" name="status_{{ member.id }}" value="Present" {% if current_status == 'Present' %}checked{% endif %}>
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="status_{{ member.id }}" value="Absent" {% if current_status == 'Absent' %}checked{% endif %}>
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="status_{{ member.id }}" value="Excused" {% if current_status == 'Excused' %}checked{% endif %}>
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="4">This club has no members to take attendance for.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div style="text-align: right; margin-top: 20px;">
+            <button type="submit" class="btn">Save Attendance</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

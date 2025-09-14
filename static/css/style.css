@@ -1,0 +1,619 @@
+/* static/css/style.css */
+
+/* --- General Body Styling --- */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #111827;
+    color: #F9FAFB;
+}
+
+/* --- Authentication Page Layout --- */
+.auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.auth-container {
+    background-color: #1F2937;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.auth-container h2 {
+    margin-bottom: 25px;
+    font-weight: 700;
+    color: #E5E7EB;
+}
+
+/* --- Form Styling --- */
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #9CA3AF;
+}
+
+.form-group input,
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #4B5563;
+    border-radius: 6px;
+    background-color: #374151;
+    color: #F9FAFB;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-control:focus {
+    outline: none;
+    border-color: #14B8A6;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.3);
+}
+
+/* --- Password Visibility Toggle --- */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    color: #9CA3AF;
+}
+
+.password-rules {
+    font-size: 12px;
+    color: #9CA3AF;
+    text-align: left;
+    margin-top: 8px;
+    width: 100%;
+}
+
+
+/* --- Button Styling --- */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #14B8A6;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    background-color: #0F766E;
+}
+
+/* --- Helper Links --- */
+.links {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.links a {
+    color: #14B8A6;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.links span {
+    color: #4B5563;
+    margin: 0 10px;
+}
+
+/* --- Flash Messages --- */
+.flash-messages,
+.flash-messages-dashboard {
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+
+/* --- Dashboard Page Body --- */
+.dashboard-body {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 260px;
+    background-color: #1F2937;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #374151;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar-logo {
+    width: 120px;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    color: #D1D5DB;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-item i {
+    width: 20px;
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.nav-item:hover {
+    background-color: #374151;
+    color: #FFF;
+}
+
+.nav-item.active {
+    background-color: #14B8A6;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.sidebar hr {
+    border: none;
+    border-top: 1px solid #374151;
+    margin: 20px 0;
+}
+
+.sidebar-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info strong {
+    color: #FFF;
+}
+
+.user-info span {
+    font-size: 12px;
+    color: #9CA3AF;
+}
+
+.logout-button {
+    color: #9CA3AF;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.logout-button:hover {
+    background-color: #374151;
+    color: #FFF;
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.main-header {
+    margin-bottom: 20px;
+}
+
+.content-body {
+    color: #D1D5DB;
+}
+
+/* --- Centered Empty State Message --- */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 60vh;
+    color: #9CA3AF;
+}
+
+.empty-state-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #4B5563;
+}
+
+.empty-state h3 {
+    color: #E5E7EB;
+    font-size: 24px;
+}
+
+.empty-state p {
+    max-width: 400px;
+    margin-bottom: 30px;
+}
+
+/* --- Data Table Styling --- */
+.table-container {
+    background-color: #1F2937;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #374151;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #374151;
+}
+
+.data-table thead th {
+    color: #9CA3AF;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.data-table tbody td {
+    color: #D1D5DB;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table td:last-child {
+    text-align: right;
+}
+
+.data-table .btn {
+    margin-left: 5px;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 14px;
+    width: auto;
+}
+
+.btn-warning {
+    background-color: #F59E0B;
+}
+
+.btn-warning:hover {
+    background-color: #D97706;
+}
+
+.btn-danger {
+    background-color: #EF4444;
+}
+
+.btn-danger:hover {
+    background-color: #DC2626;
+}
+
+.btn-success {
+    background-color: #10B981;
+}
+
+.btn-success:hover {
+    background-color: #059669;
+}
+
+.btn-secondary {
+    background-color: #4B5563;
+}
+
+.btn-secondary:hover {
+    background-color: #374151;
+}
+
+
+/* --- Two Column Layout for Management Pages --- */
+.two-column-layout {
+    display: flex;
+    gap: 30px;
+}
+
+.main-column {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.side-column {
+    flex: 1;
+}
+
+.content-card {
+    background-color: #1F2937;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #374151;
+}
+
+.content-card h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #374151;
+    padding-bottom: 15px;
+    color: #E5E7EB;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.content-header h2 {
+    margin: 0;
+    color: #FFF;
+}
+
+.form-group-row {
+    display: flex;
+    gap: 20px;
+}
+
+.member-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.member-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #374151;
+    color: #D1D5DB;
+}
+
+.member-list li:last-child {
+    border-bottom: none;
+}
+
+.btn-icon-danger {
+    background: none;
+    border: none;
+    color: #9CA3AF;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.btn-icon-danger:hover {
+    color: #EF4444;
+}
+
+/* --- Calendar Styling --- */
+#calendar {
+    color: #D1D5DB;
+}
+
+.fc .fc-button-primary {
+    background-color: #14B8A6;
+    border-color: #14B8A6;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    background: rgba(20, 184, 166, 0.2);
+}
+
+.fc-event {
+    cursor: pointer;
+}
+
+/* --- General Text & Layout Helpers --- */
+.text-muted {
+    color: #9CA3AF;
+    font-size: 14px;
+}
+
+/* --- Admin Panel Stat Cards --- */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.stat-card {
+    background-color: #1F2937;
+    border-radius: 8px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #374151;
+}
+
+.stat-card i {
+    font-size: 32px;
+    color: #14B8A6;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFF;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #9CA3AF;
+}
+
+/* --- Badges for Roles & Statuses --- */
+.badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #FFF;
+}
+
+.badge-admin {
+    background-color: #EF4444;
+}
+
+.badge-manager {
+    background-color: #F59E0B;
+}
+
+.badge-teacher {
+    background-color: #3B82F6;
+}
+
+.badge-student {
+    background-color: #6B7280;
+}
+
+.badge-present {
+    background-color: #10B981;
+}
+
+.badge-absent {
+    background-color: #4B5563;
+}
+
+.badge-excused {
+    background-color: #6366F1;
+}
+
+
+/* --- Event List in Manage Club --- */
+.event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #374151;
+}
+
+.event-list li:last-child {
+    border-bottom: none;
+}
+
+.event-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

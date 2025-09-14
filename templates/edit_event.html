@@ -1,0 +1,32 @@
+{% extends "dashboard_layout.html" %}
+{% block title %}Edit Event{% endblock %}
+{% block dashboard_content %}
+<div class="content-header">
+    <h2>Edit Event: {{ event.title }}</h2>
+    <a href="{{ url_for('manage_event', event_id=event.id) }}" class="btn btn-secondary">Back to Event</a>
+</div>
+
+<div class="content-card">
+    <form method="POST" action="{{ url_for('edit_event', event_id=event.id) }}">
+        <div class="form-group">
+            <label for="title">Event Title</label>
+            <input type="text" id="title" name="title" class="form-control" value="{{ event.title }}" required>
+        </div>
+        <div class="form-group">
+            <label for="details">Event Details</label>
+            <textarea id="details" name="details" class="form-control" rows="3" required>{{ event.details }}</textarea>
+        </div>
+        <div class="form-group-row">
+            <div class="form-group">
+                <label for="start_time">Start Time</label>
+                <input type="datetime-local" id="start_time" name="start_time" class="form-control" value="{{ event.start_time.strftime('%Y-%m-%dT%H:%M') }}" required>
+            </div>
+            <div class="form-group">
+                <label for="end_time">End Time</label>
+                <input type="datetime-local" id="end_time" name="end_time" class="form-control" value="{{ event.end_time.strftime('%Y-%m-%dT%H:%M') }}" required>
+            </div>
+        </div>
+        <button type="submit" class="btn">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

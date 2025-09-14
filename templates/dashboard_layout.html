@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ClubFusion{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <aside class="sidebar">
+        <div class="sidebar-header"><a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='clubfusion_logo.png') }}" alt="Logo" class="sidebar-logo"></a></div>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('dashboard') }}" class="nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+            <a href="{{ url_for('calendar') }}" class="nav-item {% if request.endpoint == 'calendar' %}active{% endif %}"><i class="fas fa-calendar-alt"></i><span>Calendar</span></a>
+            <a href="{{ url_for('clubs') }}" class="nav-item {% if request.endpoint == 'clubs' %}active{% endif %}"><i class="fas fa-users"></i><span>Clubs</span></a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info"><strong>{{ current_user.username }}</strong><span>{{ current_user.role.capitalize() }}</span></div>
+            <a href="{{ url_for('logout') }}" class="logout-button" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <header class="main-header">
+            {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-messages-dashboard">
+            {% for category, message in messages %}<div class="alert alert-{{ category }}">{{ message }}</div>{% endfor %}
+            </div>{% endif %}{% endwith %}
+        </header>
+        <div class="content-body">
+            {% block dashboard_content %}{% endblock %}
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "dashboard_layout.html" %}
+{% block title %}Events Calendar{% endblock %}
+{% block dashboard_content %}
+<div class="content-header"><h2>Events Calendar</h2></div>
+<div class="content-card">
+    <div id="calendar"></div>
+</div>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,listWeek' },
+            events: '/api/events',
+            eventColor: '#14B8A6',
+            eventBackgroundColor: '#14B8A6',
+            eventBorderColor: '#0F766E',
+        });
+        calendar.render();
+    });
+</script>
+{% endblock %}

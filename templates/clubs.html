@@ -1,0 +1,28 @@
+{% extends "dashboard_layout.html" %}
+{% block title %}Clubs - ClubFusion{% endblock %}
+{% block dashboard_content %}
+<div class="content-header">
+    <h2>All Clubs</h2>
+    {% if current_user.role in ['manager', 'admin'] %}<a href="{{ url_for('create_club') }}" class="btn">Create New Club</a>{% endif %}
+</div>
+<div class="table-container">
+    <table class="data-table">
+        <thead><tr><th>Club Name</th><th>Description</th><th>Manager</th><th>Members</th><th>Actions</th></tr></thead>
+        <tbody>
+            {% for club in all_clubs %}
+            <tr>
+                <td><strong>{{ club.name }}</strong></td><td>{{ club.description }}</td><td>{{ club.manager.username }}</td><td>{{ club.members.count() }}</td>
+                <td>
+                    {% if current_user.role == 'student' %}
+                        {% if club.id in joined_club_ids %}<form action="{{ url_for('leave_club', club_id=club.id) }}" method="POST" style="display:inline;"><button type="submit" class="btn btn-sm btn-warning">Leave</button></form>
+                        {% else %}<form action="{{ url_for('join_club', club_id=club.id) }}" method="POST" style="display:inline;"><button type="submit" class="btn btn-sm btn-success">Join</button></form>{% endif %}
+                    {% elif current_user.role == 'manager' and club.manager_id == current_user.id %}<a href="{{ url_for('manage_club', club_id=club.id) }}" class="btn btn-sm">Manage</a>
+                    {% elif current_user.role == 'admin' %}<a href="{{ url_for('manage_club', club_id=club.id) }}" class="btn btn-sm">Manage</a><form action="{{ url_for('delete_club', club_id=club.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to permanently delete this club?');"><button type="submit" class="btn btn-sm btn-danger">Delete</button></form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}<tr><td colspan="5" style="text-align: center;">There are no clubs in the system yet.</td></tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

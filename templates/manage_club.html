@@ -1,0 +1,64 @@
+{% extends "dashboard_layout.html" %}
+{% block title %}Manage {{ club.name }}{% endblock %}
+{% block dashboard_content %}
+<div class="content-header">
+    <h2>Manage Club: {{ club.name }}</h2>
+    <a href="{{ url_for('clubs') }}" class="btn btn-secondary">Back to All Clubs</a>
+</div>
+<div class="two-column-layout">
+    <div class="main-column">
+        <div class="content-card">
+            <h3>Edit Club Details</h3>
+            <form method="POST" action="{{ url_for('manage_club', club_id=club.id) }}">
+                <div class="form-group"><label for="name">Club Name</label><input type="text" id="name" name="name" class="form-control" value="{{ club.name }}" required></div>
+                <div class="form-group"><label for="description">Club Description</label><textarea id="description" name="description" class="form-control" rows="5" required>{{ club.description }}</textarea></div>
+                <button type="submit" class="btn">Save Changes</button>
+            </form>
+        </div>
+        <div class="content-card">
+            <h3>Create New Event</h3>
+            <form method="POST" action="{{ url_for('create_event', club_id=club.id) }}">
+                <div class="form-group"><label for="title">Event Title</label><input type="text" id="title" name="title" class="form-control" required></div>
+                <div class="form-group"><label for="details">Event Details</label><textarea id="details" name="details" class="form-control" rows="3" required></textarea></div>
+                <div class="form-group-row">
+                    <div class="form-group"><label for="start_time">Start Time</label><input type="datetime-local" id="start_time" name="start_time" class="form-control" required></div>
+                    <div class="form-group"><label for="end_time">End Time</label><input type="datetime-local" id="end_time" name="end_time" class="form-control" required></div>
+                </div>
+                <button type="submit" class="btn btn-success">Add Event</button>
+            </form>
+        </div>
+        <div class="content-card">
+            <h3><i class="fas fa-calendar-alt"></i> Club Events</h3>
+            <ul class="event-list">
+                {% for event in club.events|sort(attribute='start_time', reverse=True) %}
+                <li>
+                    <div class="event-info">
+                        <strong>{{ event.title }}</strong>
+                        <span class="text-muted">{{ event.start_time.strftime('%a, %b %d, %Y @ %I:%M %p') }}</span>
+                    </div>
+                    <div class="event-actions">
+                        <a href="{{ url_for('manage_event', event_id=event.id) }}" class="btn btn-sm btn-secondary">Attendance</a>
+                        <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-sm">Edit</a>
+                        <form action="{{ url_for('delete_event', event_id=event.id) }}" method="POST" onsubmit="return confirm('Delete this event permanently?');">
+                            <button type="submit" class="btn-icon-danger" title="Delete Event"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </div>
+                </li>
+                {% else %}
+                <li>This club has no upcoming events.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="side-column">
+        <div class="content-card">
+            <h3><i class="fas fa-users"></i> Club Members ({{ club.members.count() }})</h3>
+            <ul class="member-list">
+                {% for member in club.members %}
+                <li><span>{{ member.username }}</span><form action="{{ url_for('remove_member', club_id=club.id, user_id=member.id) }}" method="POST" onsubmit="return confirm('Remove this member?');"><button type="submit" class="btn-icon-danger"><i class="fas fa-times"></i></button></form></li>
+                {% else %}<li>No members yet.</li>{% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

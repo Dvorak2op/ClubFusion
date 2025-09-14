@@ -1,0 +1,18 @@
+{% extends "dashboard_layout.html" %}
+{% block title %}Reports{% endblock %}
+{% block dashboard_content %}
+<div class="content-header">
+    <h2><i class="fas fa-chart-bar"></i> Attendance Reports</h2>
+</div>
+<div class="content-card">
+    <h3>Select a Club to View Reports</h3>
+    <p>Choose a club from the list below to see a detailed breakdown of event attendance.</p>
+    <ul class="simple-list">
+        {% for club in all_clubs %}
+            <li><a href="{{ url_for('report_club_detail', club_id=club.id) }}">{{ club.name }}</a></li>
+        {% else %}
+            <li>There are no clubs in the system to generate reports for.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

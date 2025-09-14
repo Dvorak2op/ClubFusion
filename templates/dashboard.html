@@ -1,0 +1,11 @@
+{% extends "dashboard_layout.html" %}
+{% block title %}Dashboard - ClubFusion{% endblock %}
+{% block dashboard_content %}
+<div class="content-header"><h2>Dashboard Overview</h2></div>
+<div class="empty-state">
+    <i class="fas fa-search-plus empty-state-icon"></i>
+    <h3>Welcome to ClubFusion!</h3>
+    <p>This is your central hub. Use the sidebar to navigate to the Clubs list, view the Events Calendar, or manage your account.</p>
+    <a href="{{ url_for('clubs') }}" class="btn">Explore Clubs</a>
+</div>
+{% endblock %}
